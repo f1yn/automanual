@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:cc="http://creativecommons.org/ns#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg"
+        width="133"
+        height="171"
+        id="svg5100"
+        version="1.1">
+    <defs
+            id="defs5102"/>
+    <metadata
+            id="metadata5105">
+        <rdf:RDF>
+            <cc:Work
+                    rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type
+                        rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                <dc:title></dc:title>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <g
+            id="layer1"
+            transform="translate(0,-752.36218)">
+        <g
+                style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+                transform="matrix(2.55317,-0.03751847,0,1.9486693,-741.94466,644.00871)"
+                id="g4708">
+            <g
+                    style="font-style:normal;font-weight:normal;font-size:39.5793px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#4ab1dc;fill-opacity:1;stroke:none"
+                    id="g4724"
+                    transform="matrix(0.93006992,0.39966823,0,1.2113496,-221.68849,-319.39392)">
+                <g
+                        id="g46"
+                        transform="translate(-13.515655,-11.101541)">
+                    <g
+                            transform="translate(-3.1186317,25.231055)"
+                            id="g4726">
+                        <g
+                                style="font-style:normal;font-weight:normal;font-size:39.5793px;line-height:125%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#4ab1dc;fill-opacity:1;stroke:none"
+                                id="g4728"
+                                transform="translate(0.2033161,-4.2075693)">
+                            <path
+                                    style="fill:#4ab1dc;fill-opacity:1"
+                                    d="m 582.60548,149.18162 12.44113,4.44425 12.826,-12.86806 v 20.79714 l -12.65204,12.84467 -12.61509,-4.42086 z"
+                                    id="path4730"/>
+                        </g>
+                        <path
+                                id="path4732"
+                                d="m 595.24992,149.41829 12.826,-12.86806 v 20.79714 l -12.65204,12.84467 z"
+                                style="fill:#ffffff;fill-opacity:0.254808"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

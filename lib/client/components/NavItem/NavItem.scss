@@ -1,0 +1,55 @@
+
+.am-header__nav {
+	&-content {
+		display: block;
+		display: flex;
+		align-content: center;
+		padding: .3rem 0;
+
+		svg {
+			margin-right: .3rem;
+		}
+	}
+
+	&-heading {
+		display: block;
+		font-size: 1.1rem;
+		text-transform: uppercase;
+		letter-spacing: 3px;
+		font-weight: 700;
+		padding: .6rem 0;
+	}
+
+	&-content,
+	&-heading {
+		line-height: 1;
+		font-size: 0.9rem;
+	}
+
+	&-button {
+		padding: 0;
+		text-align: left;
+		border: 0;
+		width: 100%;
+		cursor: pointer;
+		outline: 0;
+	}
+
+	&-link,
+	&-linkless {
+		display: block;
+		text-decoration: none;
+
+		&:visited,
+		&:active {
+			color: inherit;
+		}
+
+		@for $i from 0 through 5 {
+			&--level-#{$i} {
+				padding-left: #{1rem * ($i)};
+			}
+		}
+	}
+}
+

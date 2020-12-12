@@ -1,0 +1,7 @@
+node_modules/
+sandbox/node_modules/
+sandbox/docs
+dist/
+dist-styles/
+.idea/
+.DS_Store

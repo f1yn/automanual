@@ -1,0 +1,61 @@
+// The default theme just uses core styles
+
+@use 'core';
+
+body {
+	font-family: "Source Sans Pro";
+}
+
+.am-header {
+	background-color: #eee;
+	border-right: solid 1px #ddd;
+	padding-top: 1rem;
+
+	&__nav-link,
+	&__nav-linkless {
+		&:hover {
+			background-color: rgba(0, 0, 0, .08);
+		}
+	}
+}
+
+.am-container {
+	padding: 2rem;
+}
+
+.am-loading {
+	background-color: #fff;
+
+	&__message {
+		color: rgba(0, 0, 0, .4);
+		text-transform: uppercase;
+		letter-spacing: 2px;
+	}
+}
+
+.am-rift {
+	border: 0;
+}
+
+.am-header__nav-content,
+.am-header__nav-heading {
+	&--search-highlighted {
+		background-color: #ccff00;
+	}
+
+	&--folded svg {
+		color: #003d5b;
+	}
+
+	&--expanded svg {
+		color: #003d5b;
+	}
+
+	&--code svg {
+		color: #d1495b;
+	}
+
+	&--misc svg {
+		color: #edae49;
+	}
+}

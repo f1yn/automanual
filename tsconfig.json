@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "sourceMap": false,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "lib",
+    "outDir": "dist",
+    "jsx": "preserve",
+    "baseUrl": "lib",
+    "paths": {
+      "@amtypes/*": ["types/*"]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "lib/assembler/**/*.ts",
+    "lib/assembler/**/*.js",
+    "lib/types/*.ts",
+    "lib/*.ts",
+    "lib/*.js"
+  ],
+  "types": [
+    "node",
+    "react"
+  ]
+}

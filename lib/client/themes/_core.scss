@@ -1,0 +1,23 @@
+// normalise
+@use 'normalise';
+
+// all core components
+@use 'lib/client/components/Nav/Nav';
+@use 'lib/client/components/NavItem/NavItem';
+@use 'lib/client/components/NavSearch/NavSearch';
+@use 'lib/client/components/PageContainer/PageContainer';
+@use 'lib/client/components/AmSpinner/AmSpinner';
+@use 'lib/client/components/LoadingProvider/LoadingProvider';
+
+// root container
+#automanual-root {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	overflow: hidden;
+}
+
+.am-container {
+	position: relative;
+}

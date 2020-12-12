@@ -1,0 +1,11 @@
+
+body {
+    color: green;
+}
+
+.button {
+    background-color: #4aa;
+    color: #fff;
+    border: 0;
+    padding: 1rem;
+}
