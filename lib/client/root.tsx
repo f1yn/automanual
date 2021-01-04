@@ -1,5 +1,5 @@
 // TODO: use aliases to make this dynamic
-import '../../dist/themes/default.css';
+import '@theme.css';
 
 // Ensure manifest is preloaded with each root
 import { entityManifest } from './globals';

@@ -5,10 +5,13 @@ import { useState, useMemo } from 'preact/hooks';
 import { buildNavigationTree } from './navTree';
 
 import { MenuAnyNode, MenuChildNode } from '@amtypes/menu';
+import { NavSearchValue } from '@amtypes/client';
 
 import NavItem from '../NavItem/NavItem';
 import NavSearch from '../NavSearch/NavSearch';
-import { NavSearchValue } from '../../../types/client';
+import AmLogo from '../AmLogo/AmLogo';
+
+import { config } from '../../globals';
 
 export default function Nav() {
 	// preserves object references as a cheap storage technique (for folding state)
@@ -41,8 +44,17 @@ export default function Nav() {
 		? searchItemState.displayMatches
 		: foldedItemState;
 
+	const customLogoUrl = config.uiOptions && config.uiOptions.logoUrl;
+
 	return (
 		<header className="am-header">
+			<div className="am-header__logo">
+				{customLogoUrl ? (
+					<img className="am-logo-custom" src={customLogoUrl} />
+				) : (
+					<AmLogo scale={0.4} />
+				)}
+			</div>
 			<NavSearch
 				value={searchItemState}
 				menuTree={menuTree}

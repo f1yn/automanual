@@ -10,6 +10,7 @@ export interface AMServerContext {
 	initialManifest: string;
 	initialDetectedPaths: Array<string>;
 	virtualModulePlugin: (ctx: AMServerContext) => any;
+	themeSource: string;
 	serverHelpers: {
 		loadOptions: () => Promise<loadOptionsResult>;
 		loadManifestAndEntities: (

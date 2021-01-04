@@ -3,8 +3,16 @@
 	height: 100%;
 }
 
+.am-header__logo {
+	.am-logo,
+	.am-custom-logo {
+		margin: 0 auto;
+		padding-bottom: 2rem;
+	}
+}
+
 .am-header__nav {
-	padding: 1rem;
+	padding: .6rem;
 
 	&-menu {
 		list-style: none;

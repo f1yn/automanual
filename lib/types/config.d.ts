@@ -22,6 +22,11 @@ export interface AMConfiguration {
 	uiOptions?: { [k: string]: any };
 	buildOptions?: { [k: string]: any };
 
+	themeOptions?: {
+		name?: string;
+		customPath?: string;
+	};
+
 	sectionDivider?: RegExp | string;
 }
 

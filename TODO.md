@@ -15,9 +15,9 @@
 - [ ] Add ability to define custom adapters/modifiers/and plugins.
 - [ ] Add propTable support (inject into entity def) (and integrate into search)
 - [ ] Add validation at specified TODO locations
-- [ ] Add custom logo support
+- [x] Add custom logo support
 - [ ] Add alternate ui theme "tile" (maybe)
-- [ ] Add theming ability (point to css for host and frame)
+- [x] Add theming ability (point to css for host and frame)
 - [ ] Enable ability to load mdx files without sibling doc.js files
 
 - [ ] Add custom adapter wiki guide

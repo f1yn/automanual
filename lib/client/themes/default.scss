@@ -9,7 +9,6 @@ body {
 .am-header {
 	background-color: #eee;
 	border-right: solid 1px #ddd;
-	padding-top: 1rem;
 
 	&__nav-link,
 	&__nav-linkless {
@@ -40,7 +39,7 @@ body {
 .am-header__nav-content,
 .am-header__nav-heading {
 	&--search-highlighted {
-		background-color: #ccff00;
+		background-color: #fffe00;
 	}
 
 	&--folded svg {
@@ -57,5 +56,18 @@ body {
 
 	&--misc svg {
 		color: #edae49;
+	}
+}
+
+.am-header-search {
+	padding: .3rem .5rem;
+	background-color: #fff;
+	border-top: solid 1px #ddd;
+	border-bottom: solid 1px #ddd;
+
+	&__input {
+		border: 0;
+		background: transparent;
+		outline: 0;
 	}
 }

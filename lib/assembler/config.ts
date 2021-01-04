@@ -124,3 +124,24 @@ function convertConfigToModuleString(
 
 	return `module.exports = ${serialize(configToConvert)}`;
 }
+
+const getBuiltInThemePathByName = (name: string) =>
+	`../../dist/themes/${name}.css`;
+
+export async function resolveThemeSourceFromConfig(
+	cwd: string,
+	config: AMConfiguration
+): Promise<string> {
+	// Detect known theme
+	if (config.themeOptions) {
+		if (['default'].includes(config.themeOptions.name)) {
+			return getBuiltInThemePathByName(config.themeOptions.name);
+		}
+
+		if (config.themeOptions.customPath) {
+			return path.join(cwd, config.themeOptions.customPath);
+		}
+	}
+
+	return getBuiltInThemePathByName('default');
+}

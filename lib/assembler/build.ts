@@ -74,6 +74,7 @@ function generateWebpackConfig(
 			extensions: ['.js', '.ts', '.tsx'],
 			alias: {
 				'@amtypes': path.resolve(__dirname, '../../lib/types'),
+				'@theme.css': context.themeSource,
 				...virtualModuleAliases,
 				...Object.assign({}, ...sharedDeps.map(buildAliasPath)),
 			},
