@@ -1,5 +1,8 @@
-// TODO: use aliases to make this dynamic
-import '@theme.css';
+// Host styles must be the first style applied
+import '@theme-host.scss';
+// Any additional static stylesheets applied will be routed to mounted Rifts,
+// both isolated and non-isolated
+import '@theme-rift.scss';
 
 // Ensure manifest is preloaded with each root
 import { entityManifest } from './globals';

@@ -74,7 +74,8 @@ function generateWebpackConfig(
 			extensions: ['.js', '.ts', '.tsx'],
 			alias: {
 				'@amtypes': path.resolve(__dirname, '../../lib/types'),
-				'@theme.css': context.themeSource,
+				'@theme-host.scss': context.hostThemeSource,
+				'@theme-rift.scss': context.riftThemeSource,
 				...virtualModuleAliases,
 				...Object.assign({}, ...sharedDeps.map(buildAliasPath)),
 			},
@@ -93,7 +94,7 @@ function generateWebpackConfig(
 				},
 				// based on storybook configuration (https://github.com/storybookjs/storybook/blob/next/lib/core/src/server/preview/base-webpack.config.js)
 				{
-					test: /\.css$/,
+					test: /\.css$|\.s[ac]ss$/,
 					sideEffects: true,
 					use: [
 						{
@@ -107,6 +108,9 @@ function generateWebpackConfig(
 							options: {
 								importLoaders: 1,
 							},
+						},
+						{
+							loader: require.resolve('sass-loader'),
 						},
 					],
 				},

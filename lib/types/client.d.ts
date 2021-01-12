@@ -13,7 +13,7 @@ export interface DocProps {
 
 export interface DocEntityProps {
 	readonly entityUuid: string;
-	readonly decorators: Array<Function>;
+	readonly decorators: Array<(any) => any>;
 	name: string;
 	adapter: AMAdaptor;
 	component: any;
@@ -59,4 +59,13 @@ export interface RiftProps {
 	readonly path: string;
 	readonly entity: ClientEntity;
 	readonly entityUuid: string;
+}
+
+export interface AmLogoProps {
+	scale?: number;
+	baseClass?: string;
+}
+
+export interface IconProps {
+	size?: number;
 }

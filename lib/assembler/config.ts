@@ -125,23 +125,39 @@ function convertConfigToModuleString(
 	return `module.exports = ${serialize(configToConvert)}`;
 }
 
-const getBuiltInThemePathByName = (name: string) =>
-	`../../dist/themes/${name}.css`;
+const getBuiltInThemePathByName = (name: string) => ({
+	host: `../client/themes/${name}.host.scss`,
+	rift: `../client/themes/${name}.rift.scss`,
+});
 
-export async function resolveThemeSourceFromConfig(
+export async function resolveThemeSourcesFromConfig(
 	cwd: string,
 	config: AMConfiguration
-): Promise<string> {
+): Promise<{ rift: string; host: string }> {
+	// Use a fallback theme path
+	let resultThemeSources = getBuiltInThemePathByName('default');
+
 	// Detect known theme
 	if (config.themeOptions) {
-		if (['default'].includes(config.themeOptions.name)) {
-			return getBuiltInThemePathByName(config.themeOptions.name);
+		// If specified, change the base AM theme
+		if ([null].includes(config.themeOptions.name)) {
+			resultThemeSources = getBuiltInThemePathByName(config.themeOptions.name);
 		}
 
-		if (config.themeOptions.customPath) {
-			return path.join(cwd, config.themeOptions.customPath);
+		if (config.themeOptions.hostThemePath) {
+			resultThemeSources.host = path.join(
+				cwd,
+				config.themeOptions.hostThemePath
+			);
+		}
+
+		if (config.themeOptions.riftThemePath) {
+			resultThemeSources.rift = path.join(
+				cwd,
+				config.themeOptions.riftThemePath
+			);
 		}
 	}
 
-	return getBuiltInThemePathByName('default');
+	return resultThemeSources;
 }

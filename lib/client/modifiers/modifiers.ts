@@ -1,4 +1,5 @@
 /** @jsx h */
+import { RiftInstance } from '@amtypes/modifier';
 import { useMemo, useEffect } from 'preact/hooks';
 
 import buildDynamicHeadModifier from './dynamicHeadModifier/dynamicHeadModifier';
@@ -6,7 +7,7 @@ import syncHashToRift from './syncHashToRift/syncHashToRift';
 
 const dynamicHeadModifier = buildDynamicHeadModifier();
 
-function useModifiers(options) {
+function useModifiers(options: RiftInstance) {
 	const availableModifiers = [dynamicHeadModifier, syncHashToRift];
 
 	// Instead of setting up in the hook, allow modifiers to pass a object reference to each
@@ -27,7 +28,7 @@ function useModifiers(options) {
 		if (!options.frame) return;
 
 		// setup style root for adding and removing styles
-		if (!options.frame.amStyleRoot) {
+		if (!options.frame['amStyleRoot']) {
 			const styleElem = document.createElement('style');
 			styleElem.id = 'amStyleRoot';
 			options.frame.document.head.appendChild(styleElem);

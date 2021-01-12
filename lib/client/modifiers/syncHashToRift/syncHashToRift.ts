@@ -1,9 +1,11 @@
+import { AMModifier, RiftInstance } from '@amtypes/modifier';
+
 // current live iframe roots
-const registeredRiftRefs = new Set();
+const registeredRiftRefs = new Set<RiftInstance>();
 
 let currentHashState = null;
 
-function reconcileHashChange(hash) {
+function reconcileHashChange(hash: string): void {
 	currentHashState = hash;
 	if (!hash) return;
 
@@ -13,7 +15,8 @@ function reconcileHashChange(hash) {
 	});
 }
 
-const asyncHashToRift = {
+const asyncHashToRift: AMModifier = {
+	id: 'sync-hash',
 	onMount(riftRef) {
 		reconcileHashChange(window.location.hash);
 		registeredRiftRefs.add(riftRef);

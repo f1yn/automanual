@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { useRef, useEffect } from 'preact/hooks';
 
 import { setLoadingState } from '../LoadingProvider/LoadingProvider';
-import { DocEntityProps } from '../../../types/client';
+import { DocEntityProps } from '@amtypes/client';
 
 export default function DocEntity({
 	entityUuid,

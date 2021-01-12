@@ -1,10 +1,8 @@
-import { FunctionalComponent } from 'preact';
-
-export interface AMAdaptor {
+export interface AMAdaptor<CompType = any> {
 	onMount: (
 		containerRef: HTMLDivElement,
-		component: FunctionalComponent | ((any) => any),
-		decorators: Array<Function>
+		component: CompType,
+		decorators: Array<(i: CompType) => CompType>
 	) => any;
-	onUnmount: (containerRef: HTMLDivElement, component: any) => void;
+	onUnmount: (containerRef: HTMLDivElement, component: CompType) => void;
 }

@@ -12,8 +12,13 @@ const adapterMap = {
 	// TODO: VUE + Angular?
 };
 
+// Cache storage for loaded adapters
 const loadedAdapterCache = new Map();
 
+/**
+ * Load adapter by name. If already cached, bypass Promise and return synchronously.
+ * @param name The name of the adapter to attempt to load
+ */
 export default (name: string): AMAdaptor | Promise<AMAdaptor> =>
 	// Get from cache (shorted sync)
 	loadedAdapterCache.get(name) ||

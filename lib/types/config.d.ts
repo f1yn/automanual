@@ -24,7 +24,8 @@ export interface AMConfiguration {
 
 	themeOptions?: {
 		name?: string;
-		customPath?: string;
+		hostThemePath?: string;
+		riftThemePath?: string;
 	};
 
 	sectionDivider?: RegExp | string;

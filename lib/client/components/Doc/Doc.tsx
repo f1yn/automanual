@@ -42,7 +42,12 @@ export default function Doc({
 	useEffect(() => {
 		if (loadedEntity) return;
 		setLoadingMessage(entityUuid, 'loading entity');
-		Promise.all([entity.load(), loadAdapterByName(adapterName)]).then(
+		Promise.all([
+			// load the entity and it's various components
+			entity.load(),
+			// load the correct adapter for this doc
+			loadAdapterByName(adapterName),
+		]).then(
 			([loadedEntityMod, loadedAdapterMod]: [LoadedEntity, AMAdaptor]) => {
 				if (loadedEntityMod) setLoadedEntity(loadedEntityMod);
 				if (loadedAdapterMod) setLoadedAdapter(loadedAdapterMod);
@@ -62,14 +67,22 @@ export default function Doc({
 	const isMdxPage = adapterName === 'mdx';
 
 	// each item to be rendered for this doc page (inside of Rift)
-	const renderList = [] as Array<preact.JSX.Element>;
+	const renderList = [] as preact.JSX.Element[];
 
 	(isMdxPage ? ['mdx'] : Object.keys(loadedEntity)).forEach(
 		(docName: string) => {
 			if (docName === 'default') return;
 
 			if (!docConfiguration.noHeadings && !isMdxPage) {
-				renderList.push(<h2 key={`heading-${docName}`}>{docName}</h2>);
+				renderList.push(
+					<h2
+						className="am-doc-heading"
+						id={docName}
+						key={`heading-${docName}`}
+					>
+						{docName}
+					</h2>
+				);
 			}
 
 			const docComponent = isMdxPage

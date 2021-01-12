@@ -11,7 +11,7 @@
 - [x] Add preact support
 - [x] Add ability to sort sidebar items (by depth + parent)
 - [x] Move loading state into context/provider
-- [x] Ensure that window in rift matched the window of the frame, not the parent
+- [x] Ensure that window in rift matches the window of the frame, not the parent
 - [ ] Add ability to define custom adapters/modifiers/and plugins.
 - [ ] Add propTable support (inject into entity def) (and integrate into search)
 - [ ] Add validation at specified TODO locations
@@ -19,14 +19,14 @@
 - [ ] Add alternate ui theme "tile" (maybe)
 - [x] Add theming ability (point to css for host and frame)
 - [ ] Enable ability to load mdx files without sibling doc.js files
+- [ ] Add BEM classes to AM generated doc elements (in preview)
+- [ ] Add basic dark theme support to default theme (and cross-reference as best practice)
 
 - [ ] Add custom adapter wiki guide
 - [ ] Add custom plugin wiki guide
 - [ ] Add custom modifier wiki guide
 - [ ] Add best (opinionated) practices wiki guide
 
-# Post-release TODO
-
-- [ ] Enable ability to point to filesystem to import documentation.js HTML output
+- [ ] Enable ability to point to filesystem to import documentation.js HTML output? (or JSON)
 - [ ] Do the above through a custom adapter type which will inject each html file into
 a hotloaded chunk. Uses a single manifest entry, but spreads to many others.

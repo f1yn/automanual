@@ -7,7 +7,7 @@ import {
 
 import globby from 'globby';
 
-import { loadConfiguration, resolveThemeSourceFromConfig } from './config';
+import { loadConfiguration, resolveThemeSourcesFromConfig } from './config';
 
 import {
 	generateRoutingEntitiesFromPaths,
@@ -47,7 +47,10 @@ async function loadManifestAndEntities(
 // Get initial values needed for the initial build step
 const [initialOptions, initialDetectedPaths] = await loadOptions();
 // Resolve theme
-const themeSource = await resolveThemeSourceFromConfig(cwd, initialOptions);
+const resolvedThemeSources = await resolveThemeSourcesFromConfig(
+	cwd,
+	initialOptions
+);
 // Build the initial mapping of detected doc pages and the initial manifest
 const initialManifest = await loadManifestAndEntities(
 	initialOptions,
@@ -61,7 +64,8 @@ const context: AMServerContext = {
 	initialOptions,
 	initialManifest,
 	initialDetectedPaths,
-	themeSource,
+	hostThemeSource: resolvedThemeSources.host,
+	riftThemeSource: resolvedThemeSources.rift,
 	// ref to virtual module plugin
 	virtualModulePlugin,
 	// helper functions needed to rebuild specific parts for a live build

@@ -4,12 +4,23 @@ import { useState, useEffect } from 'preact/hooks';
 
 import AmLogo from '../AmLogo/AmLogo';
 
-const loadedEntitiesByUuid = new Set();
-const loadingStateMessagesByUuid = new Map();
+const loadedEntitiesByUuid = new Set<string>();
+const loadingStateMessagesByUuid = new Map<string, string | null>();
 
-export default function LoadingProvider({ children, entityUuid, isolated }) {
+const globalSetKey = '__am_updateEntityLoadingState';
+const globalSetMessageKey = '__am_updateEntityLoadingStateMessage';
+
+export default function LoadingProvider({
+	children,
+	entityUuid,
+	isolated,
+}: {
+	children: preact.ComponentChildren;
+	entityUuid: string;
+	isolated: boolean;
+}) {
 	const [canShowLoading, setCanShowLoading] = useState(false);
-	const forceRender = useState()[1];
+	const forceRender = useState(0)[1];
 
 	// prevent showing loader if loading state is resolved within 64ms (typically from cache)
 	useEffect(() => {
@@ -36,16 +47,13 @@ export default function LoadingProvider({ children, entityUuid, isolated }) {
 	useEffect(() => {
 		if (window.top === window) {
 			// bind hooks since we cant transfer context into an iframe
-			window.__am_updateEntityLoadingState = function (entityUuid, newState) {
+			window[globalSetKey] = function (entityUuid, newState) {
 				if (typeof entityUuid !== 'string') return;
 				loadedEntitiesByUuid[newState ? 'add' : 'delete'](entityUuid);
 				// Force a re-render once loading state updates for a given entity
 				forceRender(Math.random());
 			};
-			window.__am_updateEntityLoadingStateMessage = function (
-				entityUuid,
-				message
-			) {
+			window[globalSetMessageKey] = function (entityUuid, message) {
 				if (typeof entityUuid !== 'string') return;
 				console.log('hook', entityUuid, message);
 				loadingStateMessagesByUuid.set(entityUuid, message);
@@ -63,19 +71,19 @@ export default function LoadingProvider({ children, entityUuid, isolated }) {
 	);
 }
 
-export function getLoadingState(entityUuid) {
+export function getLoadingState(entityUuid: string) {
 	return !loadedEntitiesByUuid.has(entityUuid);
 }
 
-export function setLoadingState(entityUuid, newState) {
-	window.top.__am_updateEntityLoadingState(entityUuid, newState);
+export function setLoadingState(entityUuid: string, newState: boolean) {
+	window.top[globalSetKey](entityUuid, newState);
 }
 
-export function setLoadingMessage(entityUuid, message) {
-	window.top.__am_updateEntityLoadingStateMessage(entityUuid, message);
+export function setLoadingMessage(entityUuid: string, message: string) {
+	window.top[globalSetMessageKey](entityUuid, message);
 }
 
-function LoadingScreen({ entityUuid }) {
+function LoadingScreen({ entityUuid }: { entityUuid: string }) {
 	if (!getLoadingState(entityUuid)) return null;
 
 	const loadingMessage = loadingStateMessagesByUuid.get(entityUuid);

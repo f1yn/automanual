@@ -1,6 +1,9 @@
 .am-header-search {
-	display: flex;
 	padding: .3rem;
+
+	&__wrapper {
+		display: flex;
+	}
 
 	&__input {
 		width: 100%;

@@ -1,0 +1,12 @@
+body[data-entity-uuid] {
+	box-sizing: border-box;
+	padding: 1rem;
+	font-family: "Source Sans Pro";
+	margin: 0;
+
+	.am-doc-heading {
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+	}
+}

@@ -3,10 +3,9 @@ import { h } from 'preact';
 import { BEM } from '../../../helpers';
 
 import { config } from '../../globals';
+import { TextBoxSearchOutline } from '../Icon/Icon';
 
 import { NavSearchProps } from '@amtypes/client';
-import { JSXInternal } from 'preact/src/jsx';
-import GenericEventHandler = JSXInternal.GenericEventHandler;
 
 export default function NavSearch({
 	value,
@@ -56,13 +55,16 @@ export default function NavSearch({
 
 	return (
 		<div className={BEM('am-header-search')}>
-			<input
-				className={BEM('am-header-search__input')}
-				type="text"
-				placeholder={config.uiOptions.searchPlaceholder || 'Search docs...'}
-				value={value.userQuery || ''}
-				onChange={onChangeInput}
-			/>
+			<div className={BEM('am-header-search__wrapper')}>
+				<TextBoxSearchOutline size={20} />
+				<input
+					className={BEM('am-header-search__input')}
+					type="text"
+					placeholder={config.uiOptions.searchPlaceholder || 'Search docs...'}
+					value={value.userQuery || ''}
+					onChange={onChangeInput}
+				/>
+			</div>
 		</div>
 	);
 }

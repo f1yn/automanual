@@ -1,0 +1,142 @@
+// The default theme just uses core styles
+
+@use 'core';
+
+body {
+	font-family: "Source Sans Pro";
+}
+
+$borderColor: rgba(0,0,0, .075);
+$focusLightColor: rgba(0,0,0, .6);
+$inactiveColor: rgba(0,0,0, .4);
+
+.am-rift {
+	border: 0;
+}
+
+.am-header-search {
+	padding: 0 .6rem;
+	color: $inactiveColor;
+
+	&:focus-within {
+		color: $focusLightColor;
+	}
+
+	&__wrapper {
+		position: relative;
+		border: solid 1px $borderColor;
+		border-radius: 6px;
+		background-color: rgba(0,0,0, .025);
+	}
+
+	svg {
+		position: absolute;
+		top: 50%;
+		left: .4rem;
+		transform: translateY(-50%);
+	}
+
+	&__input {
+		color: inherit;
+		position: relative;
+		width: 100%;
+		padding-left: 2rem;
+		padding-top: .4rem;
+		padding-bottom: .4rem;
+		font-weight: 300;
+		outline: none;
+		background: none;
+		border: 0;
+		cursor: pointer;
+
+		&:focus {
+			cursor: auto;
+		}
+
+		&::placeholder {
+			color: inherit;
+		}
+	}
+}
+
+.am-header {
+	background: #fff;
+	border-right: solid 1px $borderColor;
+
+	// enable resize
+	resize: horizontal;
+	overflow: auto;
+
+
+	&__nav {
+		padding: .5rem 0;
+		margin: 0;
+
+		&-item {
+			&:hover {
+				background-color: rgba(0,0,0,.03);
+			}
+		}
+
+		&-button,
+		&-linkless {
+			background-color: transparent;
+			color: rgba(0,0,0,.7);
+
+			&:hover {
+				color: rgba(0,0,0,1);
+			}
+
+			svg {
+				// display: none;
+			}
+		}
+
+		&-heading {
+			padding: .6rem;
+			color: #000;
+			text-transform: uppercase;
+			font-size: .9rem;
+			font-weight: 600;
+			letter-spacing: 1.2px;
+		}
+
+		&-content {
+			padding: .4rem .5rem;
+			font-size: 1rem;
+
+			svg {
+				opacity: .35;
+			}
+		}
+	}
+}
+
+//.am-rift {
+//	am-heading
+//}
+
+/*
+.am-header__nav-content,
+.am-header__nav-heading {
+	&--search-highlighted {
+		background-color: #fffe00;
+	}
+
+	&--folded svg {
+		color: #003d5b;
+	}
+
+	&--expanded svg {
+		color: #003d5b;
+	}
+
+	&--code svg {
+		color: #d1495b;
+	}
+
+	&--misc svg {
+		color: #edae49;
+	}
+}
+} */

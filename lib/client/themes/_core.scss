@@ -2,13 +2,13 @@
 @use 'normalise';
 
 // all core components
-@use 'lib/client/components/Nav/Nav';
-@use 'lib/client/components/NavItem/NavItem';
-@use 'lib/client/components/NavSearch/NavSearch';
-@use 'lib/client/components/PageContainer/PageContainer';
-@use 'lib/client/components/AmLogo/AmLogo';
-@use 'lib/client/components/AmLogo/AmLogoSpinner';
-@use 'lib/client/components/LoadingProvider/LoadingProvider';
+@use '../components/Nav/Nav';
+@use '../components/NavItem/NavItem';
+@use '../components/NavSearch/NavSearch';
+@use '../components/PageContainer/PageContainer';
+@use '../components/AmLogo/AmLogo';
+@use '../components/AmLogo/AmLogoSpinner';
+@use '../components/LoadingProvider/LoadingProvider';
 
 // root container
 #automanual-root {

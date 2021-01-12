@@ -1,25 +1,15 @@
 import { AMAdaptor } from '@amtypes/adaptor';
 
-const applyDecorators = (originalGetHtml, decorators) => () => {
-	let finalGetHtml = originalGetHtml();
+import { applyDecorators } from './shared';
 
-	if (!decorators || !decorators.length) return finalGetHtml;
-
-	let index = decorators.length;
-	while (index--) {
-		finalGetHtml = decorators[index](finalGetHtml);
-	}
-
-	return finalGetHtml;
-};
+type HTMLComponent = () => string;
 
 export default {
 	onMount(frameContainer, originalGetHtml, decorators) {
-		console.log('mount html');
-		const getHTML = applyDecorators(originalGetHtml, decorators);
+		const getHTML = applyDecorators(originalGetHtml(), decorators);
 		frameContainer.innerHTML = getHTML();
 	},
 	onUnmount(frameContainer, component) {
 		console.log('unmount html');
 	},
-} as AMAdaptor;
+} as AMAdaptor<HTMLComponent>;

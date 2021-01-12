@@ -19,6 +19,8 @@ Built with ❤ and SWC + Preact + TypeScript and webpack
 - [x] Static HTML
 - [ ] Documentation.js
 - [ ] Vue.js
+- [ ] Angular
+- [ ] OpenAPI 3+
 
 ## Getting started
 
