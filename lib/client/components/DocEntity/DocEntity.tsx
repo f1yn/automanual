@@ -6,8 +6,9 @@ import { setLoadingState } from '../LoadingProvider/LoadingProvider';
 import { DocEntityProps } from '@amtypes/client';
 
 export default function DocEntity({
+	entityConfig,
+	docConfiguration,
 	entityUuid,
-	decorators,
 	component,
 	name,
 	adapter,
@@ -17,7 +18,7 @@ export default function DocEntity({
 	// handle adapter here
 	useEffect(() => {
 		if (!containerRef) return;
-		adapter.onMount(containerRef.current, component, decorators);
+		adapter.onMount(containerRef.current, component, entityConfig.decorators);
 		// Flag loading as done for this entity
 		setLoadingState(entityUuid, true);
 		return () => adapter.onUnmount(containerRef.current, component);

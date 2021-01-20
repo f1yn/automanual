@@ -8,6 +8,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import advancedInsertAtTop from './webpackInsertStyleHelper';
 import { virtualModuleAliases } from './virtualModules';
 
+import allShims from '../shims/shims';
+
 /**
  * Ensures deps are loaded from as user directory
  * @type {Array}
@@ -76,6 +78,7 @@ function generateWebpackConfig(
 				'@amtypes': path.resolve(__dirname, '../../lib/types'),
 				'@theme-host.scss': context.hostThemeSource,
 				'@theme-rift.scss': context.riftThemeSource,
+				...allShims,
 				...virtualModuleAliases,
 				...Object.assign({}, ...sharedDeps.map(buildAliasPath)),
 			},
@@ -142,7 +145,6 @@ function generateWebpackConfig(
 				inject: 'body',
 			}),
 			context.virtualModulePlugin(context),
-			// new WebpackInvalidatorPlugin(),
 		],
 	};
 

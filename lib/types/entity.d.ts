@@ -25,8 +25,12 @@ export interface ClientEntity
 }
 
 export interface LoadedEntity {
-	default: { [configKey: string]: any };
+	default: LoadedEntityConfig;
 	[exportKey: string]: any;
+}
+
+export interface LoadedEntityConfig {
+	[configKey: string]: any;
 }
 
 export interface EntityManifest {

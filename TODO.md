@@ -19,7 +19,7 @@
 - [ ] Add alternate ui theme "tile" (maybe)
 - [x] Add theming ability (point to css for host and frame)
 - [ ] Enable ability to load mdx files without sibling doc.js files
-- [ ] Add BEM classes to AM generated doc elements (in preview)
+- [x] Add BEM classes to AM generated doc elements (in preview)
 - [ ] Add basic dark theme support to default theme (and cross-reference as best practice)
 
 - [ ] Add custom adapter wiki guide

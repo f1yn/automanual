@@ -1,10 +1,10 @@
 /** @jsx h */
 import { Fragment, h } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect, useState, useMemo } from 'preact/hooks';
 
 import { DocProps, DocConfiguration } from '@amtypes/client';
 import { LoadedEntity } from '@amtypes/entity';
-import { AMAdaptor } from '@amtypes/adaptor';
+import { AMAdaptor, AMPropData } from '@amtypes/adaptor';
 
 import useModifiers from '../../modifiers/modifiers';
 import loadAdapterByName, {
@@ -28,8 +28,11 @@ export default function Doc({
 	const [loadedAdapter, setLoadedAdapter] = useState<AMAdaptor>(
 		preloadedAdapter
 	);
+	const [resolvedPropData, setResolvedPropData] = useState<AMPropData>({});
+
 	const adapterName = getAdapterNameFromEntity(entity);
 
+	// Load relevant environment modifiers
 	useModifiers({
 		frame: !isolated && selfRef.contentWindow,
 		doc: !isolated && selfRef.contentDocument,
@@ -57,6 +60,14 @@ export default function Doc({
 
 	// Reply on loading provider
 	if (!loadedEntity) return null;
+
+	// Determine prop-data asynchronously. Slightly slow on first run
+	useEffect(() => {
+		if (!loadedAdapter.resolvePropDataFromEntity) return;
+		loadedAdapter
+			.resolvePropDataFromEntity(loadedEntity)
+			.then((propData) => setResolvedPropData(propData));
+	}, [loadedAdapter, loadedEntity]);
 
 	const docConfiguration = {
 		...(loadedEntity.default.config || {}),
@@ -93,14 +104,19 @@ export default function Doc({
 
 			renderList.push(
 				<DocEntity
-					decorators={loadedEntity && loadedEntity.default.decorators}
+					entityConfig={loadedEntity.default}
+					docConfiguration={docConfiguration}
+					adapter={loadedAdapter}
 					entityUuid={entityUuid}
 					name={docName}
 					key={`am-comp-${docName}`}
 					component={docComponent}
-					adapter={loadedAdapter}
 				/>
 			);
+
+			if (resolvedPropData[docName]) {
+				renderList.push(<b>Loaded Props!</b>);
+			}
 		}
 	);
 

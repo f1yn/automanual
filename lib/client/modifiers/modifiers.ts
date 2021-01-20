@@ -26,14 +26,6 @@ function useModifiers(options: RiftInstance) {
 
 	useEffect(() => {
 		if (!options.frame) return;
-
-		// setup style root for adding and removing styles
-		if (!options.frame['amStyleRoot']) {
-			const styleElem = document.createElement('style');
-			styleElem.id = 'amStyleRoot';
-			options.frame.document.head.appendChild(styleElem);
-		}
-
 		// Handle unmount callback
 		return () =>
 			availableModifiers.forEach((modifier) => modifier.onUnmount(options));

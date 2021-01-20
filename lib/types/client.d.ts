@@ -1,4 +1,8 @@
-import { ClientEntity, LoadedEntity } from '@amtypes/entity';
+import {
+	ClientEntity,
+	LoadedEntity,
+	LoadedEntityConfig,
+} from '@amtypes/entity';
 import { AMAdaptor } from '@amtypes/adaptor';
 import { MenuAnyNode, MenuChildNode, MenuRootNode } from '@amtypes/menu';
 
@@ -11,16 +15,17 @@ export interface DocProps {
 	isolated?: boolean;
 }
 
+export interface DocConfiguration {
+	noHeadings: boolean;
+}
+
 export interface DocEntityProps {
 	readonly entityUuid: string;
-	readonly decorators: Array<(any) => any>;
+	entityConfig: LoadedEntityConfig;
+	docConfiguration: DocConfiguration;
 	name: string;
 	adapter: AMAdaptor;
 	component: any;
-}
-
-export interface DocConfiguration {
-	noHeadings: boolean;
 }
 
 export interface NavItemProps {

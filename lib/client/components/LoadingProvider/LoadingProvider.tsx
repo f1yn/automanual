@@ -91,7 +91,7 @@ function LoadingScreen({ entityUuid }: { entityUuid: string }) {
 	return (
 		<div className="am-loading">
 			<div>
-				<AmLogo baseClass="am-spinner" scale={1.5} />;
+				<AmLogo baseClass="am-spinner" scale={1.5} />
 				{loadingMessage ? (
 					<div className="am-loading__message">{loadingMessage}</div>
 				) : null}

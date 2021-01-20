@@ -21,6 +21,9 @@ export default function createSingletonDynamicHeadProxy(): AMModifier {
 	// needed for remounting due to es/css module complexity
 	const headNodeCache = {};
 
+	// complex cache of dynamically added rules
+	const addedRulesCache = {};
+
 	// Get initial set of node to apply based on the host window's head
 	// Any additional (static) style imports in the root application will be stored here
 	const globalHeadNodes = Array.from(
@@ -52,28 +55,43 @@ export default function createSingletonDynamicHeadProxy(): AMModifier {
 			...(headNodeCache[entityUuid] || []),
 		];
 
+		// Frame styles (from the theme) will typically mean this line will be ignore
+		// Still, we'll check this in case someone disables this in their configuration
 		if (!headNodesToApply.length) return;
 
 		// batch head items together to avoid weird behaviors
 		const fragment = frame.document.createDocumentFragment();
 
 		headNodesToApply.forEach((headNodeSource) => {
-			const headElement = headNodeSource.cloneNode(true);
-			fragment.appendChild(headElement);
+			const isStyleElement = headNodeSource.tagName === 'STYLE';
+
+			// If we are dealing with a style element, create a new one
+			// otherwise clone the existing element
+			const headElement = isStyleElement
+				? document.createElement('style')
+				: headNodeSource.cloneNode(true);
 
 			// clone styles over
-			if (headNodeSource.tagName === 'STYLE' && headNodeSource.sheet) {
-				for (
-					let index = 0;
-					index < headNodeSource.sheet.rules.length;
-					index++
-				) {
-					headElement.sheet.insertRule(
-						headNodeSource.sheet.rules[index].cssText
-					);
-				}
+			if (isStyleElement) {
+				// Don't add sheet styles (as they are tracked separately)
+				if (headElement.sheet) return;
+
+				// Ensure that physical styles are carried over, otherwise ensure that
+				// sheet is correctly initialised for the cloned style element
+				headElement.innerHTML = headNodeSource.innerHTML || '';
 			}
+
+			fragment.appendChild(headElement);
 		});
+
+		// Inject any dynamically generated rules for this doc page
+		const rules = addedRulesCache[entityUuid];
+
+		if (rules) {
+			for (let index = 0; index < rules.length; index++) {
+				frame['amStyleRoot'].sheet.insertRule(rules[index], undefined, true);
+			}
+		}
 
 		// Apply all styles at once (best effort to avoid reflow issues)
 		frame.document.head.appendChild(fragment);
@@ -109,16 +127,26 @@ export default function createSingletonDynamicHeadProxy(): AMModifier {
 	// any rules being applied dynamically. This allows us to basically apply
 	// all added css rules in a non-isolated environment to each active frame
 	// retrospectively
-	const originalInsertRuleRef = CSSStyleSheet.prototype.insertRule;
+	const originalInsertRuleRef =
+		window.top['CSSStyleSheet'].prototype.insertRule;
 
-	function customInsertRule(rule, index) {
+	function customInsertRule(rule, index, selfCall) {
+		// Avoid (potential) recursion if this module is forced to re-init
+		if (selfCall) return;
+
 		// apply styles to top level to ensure non-breakage
-		originalInsertRuleRef.apply(this, [rule, index]);
+		originalInsertRuleRef.apply(this, [rule, index, true]);
 
 		// apply to each root
 		registeredRiftRefs.forEach((riftRef) => {
-			riftRef.frame['amStyleRoot'].sheet.insertRule(rule, index);
+			if (!addedRulesCache[riftRef.entityUuid]) {
+				addedRulesCache[riftRef.entityUuid] = [];
+			}
+			addedRulesCache[riftRef.entityUuid].push(rule);
+			riftRef.frame['amStyleRoot'].sheet.insertRule(rule, undefined, true);
 		});
+
+		return index;
 	}
 
 	// bind observers/prototype overrides
